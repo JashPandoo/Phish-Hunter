@@ -13,23 +13,29 @@ Follow the steps below to set up and run the project. (Example)
 // TODO: List software, runtimes, frameworks, and or dependencies
 // along with instructions on how to set each up.
 ```
-- Example: Node.js v18+
-- Example: Python 3.10
-- Example: Docker
+- Python 3.10
+- Flask
+- JavaScript, css, html
 
 ---
 
 ## ⚙️ Installation
 ``` bash
 # Clone the repository
-git clone <your-repo-url>
-cd <repo-name>
+git clone https://github.com/JashPandoo/Phish-Hunter.git
+cd Phish-Hunter
 
 # Install dependencies
-<insert command here>
+To install Flask
+    pip install flask
 ```
 
 ## ▶️ Running the Project
 ``` bash
-<insert run command here> # Or an explanation on what to do
+From the src/ directory, run:
+python app.py
+
+Flask will start a local server, usually at:
+http://127.0.0.1:5000
+
 ```

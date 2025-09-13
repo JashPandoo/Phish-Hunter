@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Phish Hunter — Cybersecurity Game</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Phish Hunter</h1>
+      <div id="xp-wrap">
+        <div id="level">Level 1</div>
+        <div id="xp-bar"><div id="xp-fill" style="width:0%"></div></div>
+        <div id="xp-text">0 XP</div>
+      </div>
+    </header>
+
+    <main>
+      <section id="question-card" class="card">
+        <div id="category" class="muted"></div>
+        <h2 id="prompt">Loading...</h2>
+        <div id="options"></div>
+      </section>
+
+      <section id="feedback" class="card hidden">
+        <div id="result"></div>
+        <div id="hint"></div>
+        <button id="next-btn">Next</button>
+      </section>
+
+      <aside id="sidebar">
+        <div class="card">
+          <h3>Badges</h3>
+          <ul id="badges"></ul>
+        </div>
+        <div class="card">
+          <h3>Stats</h3>
+          <div>Streak: <span id="streak">0</span></div>
+          <div>XP: <span id="xp">0</span></div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- <footer>
+      <small>Built for 24h hackathon — demo this to show learning + fun 🎮🔒</small>
+    </footer> -->
+  </div>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>
