@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, session
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 from flask import send_from_directory
 from datetime import timedelta
 import random
@@ -58,9 +58,20 @@ def init_session():
     session.modified = True
 
 @app.route("/")
+def landing():
+    init_session()
+    return render_template("landingPage.html")
+
+@app.route("/index")
 def index():
     init_session()
     return render_template("index.html")
+
+@app.route("/reset")
+def reset():
+    session.clear()
+    return redirect(url_for("landing"))
+
 
 @app.route("/api/questions")
 def questions():

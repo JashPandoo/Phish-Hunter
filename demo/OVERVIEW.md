@@ -4,13 +4,14 @@
 
 ## 🎯 Project Name
 ``` c
-// TODO: Enter your project name here
+Phish Hunter
 ```
 
 ## 🚀 Summary
 ``` c
 // TODO: Write a short, high-level description of your
 // project (2–3 sentences).
+An educational, browser-based game to help people improve their cybersecurity knowledge. 
 ```
 
 ## ✨ Key Features
