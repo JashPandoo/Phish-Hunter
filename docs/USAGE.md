@@ -9,16 +9,20 @@
 ```
 ``` bash
 # Example
-npm start
+From the src/ directory, run:
+python app.py
+
+Flask will start a local server, usually at:
+http://127.0.0.1:5000
 ```
 
 ## 🖥️ How to Use
 ``` c
 // TODO: Provide step-by-step usage instructions for judges/users.
 ```
-1. Step 1 -> Do this
-2. Step 2 -> Then this
-3. Step 3 -> See the output/result
+1. Step 1 -> Click Start button to begin quiz
+2. Step 2 -> Select answers from multiple choice questions
+3. Step 3 -> Optionally Click Reset button to reset Progress
 
 ## 🎥 Demo
 ``` c
@@ -26,7 +30,7 @@ npm start
 ```
 Check out the Demos: 
 - [Demo Video](../demo/demo.mp4)
-- [Demo Presentation](../demo/demo.pptx)
+- [Demo Presentation](demo/Phish Hunter.pptx)
 
 ## 📌 Notes
 ``` c
