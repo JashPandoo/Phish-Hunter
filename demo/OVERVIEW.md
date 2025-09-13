@@ -11,24 +11,31 @@ Phish Hunter
 ``` c
 // TODO: Write a short, high-level description of your
 // project (2–3 sentences).
-An educational, browser-based game to help people improve their cybersecurity knowledge. It aims to have the user interact with the game so that they can gain a better understanding how to improve their security online.
+Phish Hunter is an engaging, browser-based educational game designed to improve cybersecurity awareness. Through interactive challenges and scenario-based questions, players learn how to identify threats, strengthen their digital habits, and protect themselves online.
 ```
 
 ## ✨ Key Features
 ``` c
 // TODO: List key features.
-Browser-based interaction. MCQ educational questions. Problem-solving questions. XP progression of levels. Focus on passwords and authentication, phishing, and cryptography
+-Interactive browser-based gameplay
+-Multiple-choice and problem-solving challenges
+-XP and level progression system (Requires 3/4 correct answers per section to move to the next level)
+-Focus on core cybersecurity topics: strong passwords, phishing, and social awareness
 
 ```
 
 ## 💡 Inspiration
 ``` c
 // TODO: Briefly explain the motivation behind your project.
-Lack of understanding and awareness of the need for cybersecurity. Many individuals can be educated on this topic to be less susceptible to online scams and fraud. Interaction with the project will help them to be aware of key concepts.
+We were inspired by the growing number of online scams, data breaches, and phishing attacks that exploit a lack of basic cybersecurity awareness. Our goal is to create a fun, interactive way for people to build essential digital safety skills while staying engaged through gamification.
 ```
 
 ## 📌 Future Improvements
 ``` c
 // TODO: Mention ideas or features you’d add if given more time.
-More minigames, less MCQ questions, a more interactive environment to make it more fun.
+-Different types of questions beyond multiple-choice
+-Additional minigames that cover areas like cryptography
+-A wider range of cybersecurity topics (e.g., social engineering, safe browsing, multi-factor authentication)
+-A badge or streak mechanic for further gamification
+-Enhanced visuals, animations, and user feedback to make learning even more engaging and fun
 ```

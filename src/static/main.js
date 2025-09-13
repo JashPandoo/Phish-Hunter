@@ -10,18 +10,6 @@ async function fetchQuestions() {
   await fetchStatus();
 }
 
-async function fetchStatus(){
-  const res = await fetch("/api/status");
-  const st = await res.json();
-  updateXPUI(st.xp, st.level);
-  // document.getElementById("streak").innerText = st.streak;
-  // renderBadges(st.badges);
-}
-
-function renderBadges(badges){
-  
-}
-
 function renderQuestion(){
   const q = questions[currentIndex];
   if (!q) {

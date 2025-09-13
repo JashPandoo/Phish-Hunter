@@ -4,7 +4,7 @@ from datetime import timedelta
 import random
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
-app.secret_key = "change-this-to-a-secure-random-key"  # replace in prod
+app.secret_key = "change-this-to-a-secure-random-key" 
 app.permanent_session_lifetime = timedelta(days=7)
 
 QUESTION_BANK = [
@@ -198,18 +198,6 @@ def reset():
     session.clear()
     return redirect(url_for("landing"))
 
-
-# @app.route("/api/questions")
-# def questions():
-#     # simple: return all questions in random order
-#     init_session()
-#     q = QUESTION_BANK.copy()
-#     random.shuffle(q)
-#     # Hide answer key
-#     for item in q:
-#         item_copy = item.copy()
-#     return jsonify(q)
-
 @app.route("/api/questions")
 def questions():
     init_session()
@@ -219,75 +207,6 @@ def questions():
     q = [item for item in QUESTION_BANK if item["category"] == category]
     random.shuffle(q)
     return jsonify(q)
-
-# @app.route("/api/answer", methods=["POST"])
-# def answer():
-#     init_session()
-#     data = request.json
-#     qid = data.get("question_id")
-#     selected = data.get("selected_index")
-#     # find question
-#     q = next((x for x in QUESTION_BANK if x["id"] == qid), None)
-#     if not q:
-#         return jsonify({"error": "Invalid question id"}), 400
-
-#     correct = (selected == q["answer_index"])
-#     xp_gained = 0
-#     badge_unlocked = None
-
-#     # update answered attempts
-#     answered = session.get("answered", {})
-#     attempts = answered.get(str(qid), {"tries": 0, "correct": False})
-#     attempts["tries"] += 1
-#     if correct:
-#         attempts["correct"] = True
-#     answered[str(qid)] = attempts
-#     session["answered"] = answered
-
-#     if correct:
-#         session["streak"] = session.get("streak", 0) + 1
-#         xp_gained += XP_PER_CORRECT
-#         # streak bonus
-#         if session["streak"] > 0 and session["streak"] % 3 == 0:
-#             xp_gained += STREAK_BONUS
-#     else:
-#         session["streak"] = 0
-
-#     # update XP & level
-#     session["xp"] = session.get("xp", 0) + xp_gained
-#     prev_level = session.get("level", 1)
-#     new_level = prev_level + (session["xp"] // LEVEL_XP) - ((prev_level - 1) if prev_level>1 else 0)
-#     # simpler: recompute from xp:
-#     new_level = (session["xp"] // LEVEL_XP) + 1
-#     session["level"] = new_level
-
-#     # Check for a sample badge: Password Master if answered 3 password questions correctly (we keep it simple)
-#     if q["category"] == "password" and correct:
-#         # count correct password answers
-#         count = 0
-#         for k, v in session["answered"].items():
-#             qobj = next((x for x in QUESTION_BANK if str(x["id"]) == k), None)
-#             if qobj and qobj["category"] == "password" and v.get("correct"):
-#                 count += 1
-#         if count >= 3 and "Password Master" not in session["badges"]:
-#             session["badges"].append("Password Master")
-#             badge_unlocked = "Password Master"
-
-#     session.modified = True
-
-#     response = {
-#         "correct": correct,
-#         "hint": q.get("hint"),
-#         "xp_gained": xp_gained,
-#         "xp_total": session["xp"],
-#         "level": session["level"],
-#         "streak": session["streak"],
-#         "badges": session["badges"],
-#         "badge_unlocked": badge_unlocked
-#     }
-#     return jsonify(response)
-
-
 
 @app.route("/api/answer", methods=["POST"])
 def answer():
@@ -330,14 +249,11 @@ def answer():
         game_completed = True
 
      # --- XP fallback logic on level fail ---
-    # If the frontend signals a level fail (e.g., after all questions and not enough XP), 
-    # you need to reset XP to the start of the current level.
-    # We'll check for a flag in the request (e.g., "level_failed": true)
     if data.get("level_failed"):
         # Set XP to the threshold for the start of this level
         session["xp"] = LEVEL_XP_THRESHOLD * (level - 1)
         session["level_xp"] = 0
-        
+
     session.modified = True
 
     response = {
