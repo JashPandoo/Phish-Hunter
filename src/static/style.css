@@ -52,3 +52,21 @@ main{display:grid;grid-template-columns:1fr 260px;gap:16px}
 #sidebar{display:flex;flex-direction:column;gap:12px}
 #badges li{list-style:none;background:#071827;padding:6px;border-radius:8px;margin-bottom:6px;color:var(--muted)}
 footer{margin-top:16px;text-align:center;color:var(--muted)}
+
+.end-btn {
+  margin-top: 24px;
+  padding: 12px 32px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(90deg, var(--accent), #60a5fa);
+  color: #022;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(2,6,23,0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+.end-btn:hover {
+  background: linear-gradient(90deg, #60a5fa, var(--accent));
+  transform: translateY(-2px) scale(1.04);
+}

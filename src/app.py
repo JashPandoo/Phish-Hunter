@@ -179,11 +179,8 @@ def init_session():
     if "xp" not in session:
         session["xp"] = 0
         session["level"] = 1
-        session["streak"] = 0
-        session["badges"] = []
         session["answered"] = {}  # question_id -> attempts/correct
         session["level_xp"] = 0  # XP earned in current level
-    # keep session changes
     session.modified = True
 
 @app.route("/")
@@ -290,6 +287,8 @@ def questions():
 #     }
 #     return jsonify(response)
 
+
+
 @app.route("/api/answer", methods=["POST"])
 def answer():
     init_session()
@@ -302,7 +301,6 @@ def answer():
 
     correct = (selected == q["answer_index"])
     xp_gained = XP_PER_CORRECT if correct else 0
-    badge_unlocked = None
 
     # update answered attempts
     answered = session.get("answered", {})
@@ -318,14 +316,18 @@ def answer():
     category = LEVEL_CATEGORIES[min(level-1, len(LEVEL_CATEGORIES)-1)]
     if q["category"] == category:
         session["level_xp"] = session.get("level_xp", 0) + xp_gained
-        session["xp"] = session.get("xp", 0) + xp_gained  # <-- ADD THIS LINE
+        session["xp"] = session.get("xp", 0) + xp_gained
 
     # Level progression logic
     level_completed = False
+    game_completed = False
     if session.get("level_xp", 0) >= LEVEL_XP_THRESHOLD:
         session["level"] = min(session["level"] + 1, len(LEVEL_CATEGORIES))
         session["level_xp"] = 0
         level_completed = True
+
+    if session.get("xp", 0) >= LEVEL_XP_THRESHOLD * len(LEVEL_CATEGORIES):
+        game_completed = True
 
     session.modified = True
 
@@ -333,24 +335,14 @@ def answer():
         "correct": correct,
         "hint": q.get("hint"),
         "xp_gained": xp_gained,
-        "xp_total": session.get("xp", 0),  # <-- ADD THIS LINE
+        "xp_total": session.get("xp", 0),
         "level": session["level"],
         "level_xp": session.get("level_xp", 0),
         "level_completed": level_completed,
-        "category": category,
-        "badges": session["badges"],
-        "badge_unlocked": badge_unlocked
+        "game_completed": game_completed,
+        "category": category
     }
     return jsonify(response)
-# @app.route("/api/status")
-# def status():
-#     init_session()
-#     return jsonify({
-#         "xp": session.get("xp", 0),
-#         "level": session.get("level", 1),
-#         "streak": session.get("streak", 0),
-#         "badges": session.get("badges", [])
-#     })
 
 @app.route("/api/status")
 def status():
@@ -358,10 +350,11 @@ def status():
     return jsonify({
         "xp": session.get("xp", 0),
         "level": session.get("level", 1),
-        "level_xp": session.get("level_xp", 0),
-        "streak": session.get("streak", 0),
-        "badges": session.get("badges", [])
+        "level_xp": session.get("level_xp", 0)
     })
+@app.route("/end")
+def end():
+    return render_template("end.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

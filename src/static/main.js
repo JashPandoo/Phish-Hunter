@@ -14,18 +14,12 @@ async function fetchStatus(){
   const res = await fetch("/api/status");
   const st = await res.json();
   updateXPUI(st.xp, st.level);
-  document.getElementById("streak").innerText = st.streak;
-  renderBadges(st.badges);
+  // document.getElementById("streak").innerText = st.streak;
+  // renderBadges(st.badges);
 }
 
 function renderBadges(badges){
-  const ul = document.getElementById("badges");
-  ul.innerHTML = "";
-  (badges || []).forEach(b => {
-    const li = document.createElement("li");
-    li.innerText = b;
-    ul.appendChild(li);
-  });
+  
 }
 
 function renderQuestion(){
@@ -147,21 +141,19 @@ function showFeedback(data, selectedIdx){
     result.style.color = "#f77";
   }
   document.getElementById("hint").innerText = data.hint || "";
-  updateXPUI(data.xp_total, data.level); // Use total XP for the bar
-  document.getElementById("streak").innerText = data.streak;
-  renderBadges(data.badges || []);
-  if (data.badge_unlocked){
-    alert("Badge unlocked: " + data.badge_unlocked);
-  }
+  updateXPUI(data.xp_total, data.level);
   document.getElementById("next-btn").onclick = () => {
+    if (data.game_completed) {
+      window.location.href = "/end";
+      return;
+    }
     if (data.level_completed) {
-      // Level up! Fetch new questions for the new category immediately.
-      alert("Level complete! Proceeding to next level.");
-      fetchQuestions();
+      runConfetti();
+      setTimeout(fetchQuestions, 1200);
+      return;
     } else {
       currentIndex++;
       if (currentIndex >= questions.length) {
-        // Only show the XP warning if the level is NOT completed
         alert("You need more XP to pass this level. Try again!");
         fetchQuestions();
       } else {
@@ -170,7 +162,6 @@ function showFeedback(data, selectedIdx){
     }
   }
 }
-
 window.onload = () => {
   fetchQuestions();
 }
