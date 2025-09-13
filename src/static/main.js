@@ -141,34 +141,46 @@ function showFeedback(data, selectedIdx){
     result.style.color = "#f77";
   }
   document.getElementById("hint").innerText = data.hint || "";
+  // Hide fail message by default
+  const failMsg = document.getElementById("fail-message");
+  failMsg.style.display = "none";
+  failMsg.innerText = "";
   updateXPUI(data.xp_total, data.level);
   document.getElementById("next-btn").onclick = () => {
     if (data.game_completed) {
-      window.location.href = "/end";
+      runConfetti();
+      setTimeout(() => {window.location.href = "/end";}, 2400); // 1.5 seconds for confetti
       return;
     }
     if (data.level_completed) {
       runConfetti();
-      setTimeout(fetchQuestions, 1200);
+      setTimeout(fetchQuestions, 2400);
       return;
     } else {
-    currentIndex++;
-    if (currentIndex >= questions.length) {
-      // Level failed: reset XP to threshold for this level
-      fetch("/api/answer", {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({level_failed: true})
-      }).then(() => {
-        alert("You need more XP to pass this level. Try again!");
-        fetchQuestions();
-      });
-    } else {
-      renderQuestion();
+      currentIndex++;
+      if (currentIndex >= questions.length) {
+        // Level failed: reset XP to threshold for this level
+        fetch("/api/answer", {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({level_failed: true})
+        }).then(() => {
+          // Show a styled message instead of alert
+          failMsg.innerText = "You need more XP to pass this level. Try again!";
+          failMsg.style.display = "block";
+          // Optionally, auto-hide after a few seconds and fetch questions
+          setTimeout(() => {
+            failMsg.style.display = "none";
+            fetchQuestions();
+          }, 5000);
+        });
+      } else {
+        renderQuestion();
+      }
     }
   }
-  }
 }
+
 window.onload = () => {
   fetchQuestions();
 }
