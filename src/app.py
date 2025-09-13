@@ -4,7 +4,7 @@ from datetime import timedelta
 import random
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
-app.secret_key = "change-this-to-a-secure-random-key" 
+app.secret_key = "a-very-secure-random-key-lol" 
 app.permanent_session_lifetime = timedelta(days=7)
 
 QUESTION_BANK = [
@@ -169,10 +169,8 @@ LEVEL_CATEGORIES = [
 ]
 LEVEL_XP_THRESHOLD = 30  # XP needed to pass a level
 
-
 XP_PER_CORRECT = 10
 LEVEL_XP = 30  # XP needed per level
-STREAK_BONUS = 10  # bonus XP on 3-correct streak
 
 def init_session():
     session.permanent = True
@@ -248,9 +246,8 @@ def answer():
     if session.get("xp", 0) >= LEVEL_XP_THRESHOLD * len(LEVEL_CATEGORIES):
         game_completed = True
 
-     # --- XP fallback logic on level fail ---
+    #XP fallback logic on level fail -> resets to 0,30,60 if fails level 1,2,3 respectively
     if data.get("level_failed"):
-        # Set XP to the threshold for the start of this level
         session["xp"] = LEVEL_XP_THRESHOLD * (level - 1)
         session["level_xp"] = 0
 

@@ -44,43 +44,7 @@ async function submitAnswer(qid, idx, el){
   const data = await res.json();
   showFeedback(data, idx);
 }
-
-// function showFeedback(data, selectedIdx){
-//   const fb = document.getElementById("feedback");
-//   fb.classList.remove("hidden");
-//   document.getElementById("question-card").classList.add("hidden");
-//   const result = document.getElementById("result");
-//   if (data.correct){
-//     result.innerText = `Correct! +${data.xp_gained} XP`;
-//     result.style.color = "#7af";
-//     // confetti on level up (simple)
-//     if (data.level > parseInt(document.getElementById("level").innerText.split(" ")[1])){
-//       runConfetti();
-//     }
-//   } else {
-//     result.innerText = `Not Quite — ${data.xp_gained} XP`;
-//     result.style.color = "#f77";
-//   }
-//   document.getElementById("hint").innerText = data.hint || "";
-//   updateXPUI(data.xp_total, data.level);
-//   document.getElementById("streak").innerText = data.streak;
-//   renderBadges(data.badges || []);
-//   if (data.badge_unlocked){
-//     // small popup
-//     alert("Badge unlocked: " + data.badge_unlocked);
-//   }
-//   // next button moves to next
-//   document.getElementById("next-btn").onclick = () => {
-//     currentIndex++;
-//     if (currentIndex >= questions.length) {
-//       // reshuffle by fetching again
-//       fetchQuestions();
-//     } else {
-//       renderQuestion();
-//     }
-//   }
-// }
-
+// update xp on the ui side
 function updateXPUI(xp, level){
   document.getElementById("xp").innerText = xp;
   document.getElementById("level").innerText = "Level " + level;
@@ -137,7 +101,7 @@ function showFeedback(data, selectedIdx){
   document.getElementById("next-btn").onclick = () => {
     if (data.game_completed) {
       runConfetti();
-      setTimeout(() => {window.location.href = "/end";}, 2400); // 1.5 seconds for confetti
+      setTimeout(() => {window.location.href = "/end";}, 2400); // 2.4 seconds for confetti
       return;
     }
     if (data.level_completed) {
@@ -153,10 +117,10 @@ function showFeedback(data, selectedIdx){
           headers: {"Content-Type":"application/json"},
           body: JSON.stringify({level_failed: true})
         }).then(() => {
-          // Show a styled message instead of alert
+          // Show error message
           failMsg.innerText = "You need more XP to pass this level. Try again!";
           failMsg.style.display = "block";
-          // Optionally, auto-hide after a few seconds and fetch questions
+          // Auto-hide after a few seconds and fetch questions
           setTimeout(() => {
             failMsg.style.display = "none";
             fetchQuestions();
