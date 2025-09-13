@@ -9,41 +9,169 @@ app.permanent_session_lifetime = timedelta(days=7)
 
 QUESTION_BANK = [
     {
-        "id": 1,
-        "category": "password",
-        "prompt": "Which password is the strongest?",
-        "options": ["12345", "mypassword", "Tr0ub4dor&3", "ilovecats"],
-        "answer_index": 2,
-        "hint": "Strong passwords combine upper/lower letters, numbers and symbols, and are not dictionary words."
+    "id": 1,
+    "category": "password",
+    "prompt": "Which password is the strongest?",
+    "options": ["12345", "mypassword", "Tr0ub4dor&3", "ilovecats"],
+    "answer_index": 2,
+    "hint": "Strong passwords mix upper/lowercase, numbers, symbols, and avoid dictionary words."
     },
     {
-        "id": 2,
-        "category": "phishing",
-        "prompt": "You receive an email: 'Your bank account is locked. Click here to unlock.' The sender is 'support@bank-secure.com'. What do you do?",
-        "options": ["Click the link and log in", "Ignore and report as phishing", "Reply asking for more info", "Forward to a friend"],
-        "answer_index": 1,
-        "hint": "Phishing emails pressure you to click links or disclose credentials. Verify via official channels."
+    "id": 2,
+    "category": "password",
+    "prompt": "What is the best practice for managing many complex passwords?",
+    "options": [
+        "Write them all down on a sticky note",
+        "Reuse one strong password everywhere",
+        "Use a password manager",
+        "Save them in your email drafts"
+    ],
+    "answer_index": 2,
+    "hint": "Password managers securely store and generate unique passwords."
     },
     {
-        "id": 3,
-        "category": "social",
-        "prompt": "A colleague asks for your login to a shared tool for convenience. How should you respond?",
-        "options": ["Give them your password", "Create a guest account or request access properly", "Share a screenshot of your dashboard", "Tell them the password over chat"],
-        "answer_index": 1,
-        "hint": "Never share credentials. Use proper access management or ask IT."
+    "id": 3,
+    "category": "password",
+    "prompt": "What is two-factor authentication (2FA)?",
+    "options": [
+        "Logging in with two different passwords",
+        "Using a password plus another form of verification (like SMS code or app)",
+        "Using a fingerprint only",
+        "Asking a friend to confirm your login"
+    ],
+    "answer_index": 1,
+    "hint": "2FA combines something you know (password) with something you have (code/device)."
     },
     {
-        "id": 4,
-        "category": "link",
-        "prompt": "Which URL looks suspicious?",
-        "options": ["https://paypal.com", "https://secure-paypal.com.login.verify.info", "https://github.com", "https://google.com"],
-        "answer_index": 1,
-        "hint": "Look for domain authority and weird subdomains or extra sections that impersonate a site."
+    "id": 4,
+    "category": "password",
+    "prompt": "Which is the safest way to store backup recovery codes?",
+    "options": [
+        "Screenshot and upload to social media",
+        "Save in plain text on desktop",
+        "Write down and store securely offline",
+        "Email them to yourself"
+    ],
+    "answer_index": 2,
+    "hint": "Recovery codes should be kept offline in a secure place."
+    },
+    {
+    "id": 5,
+    "category": "phishing",
+    "prompt": "You receive an email: 'Your bank account is locked. Click here to unlock.' The sender is 'support@bank-secure.com'. What do you do?",
+    "options": [
+        "Click the link and log in",
+        "Ignore and report as phishing",
+        "Reply asking for more info",
+        "Forward to a friend"
+    ],
+    "answer_index": 1,
+    "hint": "Phishing emails pressure you to click links or give credentials."
+    },
+    {
+    "id": 6,
+    "category": "phishing",
+    "prompt": "Which is a common sign of a phishing email?",
+    "options": [
+        "Personalized greeting using your full name",
+        "Poor spelling/grammar and urgent threats",
+        "Email from your known manager",
+        "A company newsletter you subscribed to"
+    ],
+    "answer_index": 1,
+    "hint": "Look for red flags like bad grammar, urgency, and suspicious links."
+    },
+    {
+    "id": 7,
+    "category": "phishing",
+    "prompt": "You hover over a link in an email, and the URL is 'http://login.paypa1.com/'. What should you do?",
+    "options": [
+        "Click it quickly before it expires",
+        "Trust it since it has 'paypal' in the name",
+        "Do not click and report as suspicious",
+        "Forward to a coworker to test it"
+    ],
+    "answer_index": 2,
+    "hint": "Look carefully: 'paypa1' uses a number '1' to mimic 'l'."
+    },
+    {
+    "id": 8,
+    "category": "phishing",
+    "prompt": "Which action is safest if you suspect a phishing attempt?",
+    "options": [
+        "Delete the email without reporting",
+        "Verify directly with the organization using official contact info",
+        "Reply asking if it is legitimate",
+        "Click and see if the page looks real"
+    ],
+    "answer_index": 1,
+    "hint": "Always verify via official websites or phone numbers, never via the suspicious message."
+    },
+    {
+    "id": 9,
+    "category": "social",
+    "prompt": "A colleague asks for your login to a shared tool for convenience. How should you respond?",
+    "options": [
+        "Give them your password",
+        "Create a guest account or request proper access",
+        "Share a screenshot of your dashboard",
+        "Tell them the password over chat"
+    ],
+    "answer_index": 1,
+    "hint": "Never share credentials. Use proper access management."
+    },
+    {
+    "id": 10,
+    "category": "social",
+    "prompt": "An attacker pretends to be IT support and calls asking for your password. What is the correct action?",
+    "options": [
+        "Provide the password to help IT",
+        "Hang up and report the incident",
+        "Ask them to email you instead",
+        "Tell them part of the password"
+    ],
+    "answer_index": 1,
+    "hint": "Legitimate IT staff will never ask for your password."
+    },
+    {
+    "id": 11,
+    "category": "social",
+    "prompt": "Why should you be careful about oversharing personal info on social media?",
+    "options": [
+        "Hackers may use details for security questions or scams",
+        "Your friends might get jealous",
+        "It reduces the number of likes you get",
+        "It makes ads less personalized"
+    ],
+    "answer_index": 0,
+    "hint": "Attackers can use birthdays, pets' names, etc., to guess passwords or answers."
+    },
+    {
+    "id": 12,
+    "category": "social",
+    "prompt": "What is 'shoulder surfing' in cybersecurity?",
+    "options": [
+        "Spying over someone’s shoulder to steal sensitive info",
+        "Looking at someone’s social media profile",
+        "Surfing the web on public Wi-Fi",
+        "A phishing website disguised as social media"
+    ],
+    "answer_index": 0,
+    "hint": "Shoulder surfing means visually stealing information, like watching you type a password."
     }
+
 ]
 
+LEVEL_CATEGORIES = [
+    "password",
+    "phishing",
+    "social"
+]
+LEVEL_XP_THRESHOLD = 30  # XP needed to pass a level
+
+
 XP_PER_CORRECT = 10
-LEVEL_XP = 50  # XP needed per level
+LEVEL_XP = 30  # XP needed per level
 STREAK_BONUS = 10  # bonus XP on 3-correct streak
 
 def init_session():
@@ -54,6 +182,7 @@ def init_session():
         session["streak"] = 0
         session["badges"] = []
         session["answered"] = {}  # question_id -> attempts/correct
+        session["level_xp"] = 0  # XP earned in current level
     # keep session changes
     session.modified = True
 
@@ -73,16 +202,93 @@ def reset():
     return redirect(url_for("landing"))
 
 
+# @app.route("/api/questions")
+# def questions():
+#     # simple: return all questions in random order
+#     init_session()
+#     q = QUESTION_BANK.copy()
+#     random.shuffle(q)
+#     # Hide answer key
+#     for item in q:
+#         item_copy = item.copy()
+#     return jsonify(q)
+
 @app.route("/api/questions")
 def questions():
-    # simple: return all questions in random order
     init_session()
-    q = QUESTION_BANK.copy()
+    level = session.get("level", 1)
+    # Clamp level to available categories
+    category = LEVEL_CATEGORIES[min(level-1, len(LEVEL_CATEGORIES)-1)]
+    q = [item for item in QUESTION_BANK if item["category"] == category]
     random.shuffle(q)
-    # Hide answer key
-    for item in q:
-        item_copy = item.copy()
     return jsonify(q)
+
+# @app.route("/api/answer", methods=["POST"])
+# def answer():
+#     init_session()
+#     data = request.json
+#     qid = data.get("question_id")
+#     selected = data.get("selected_index")
+#     # find question
+#     q = next((x for x in QUESTION_BANK if x["id"] == qid), None)
+#     if not q:
+#         return jsonify({"error": "Invalid question id"}), 400
+
+#     correct = (selected == q["answer_index"])
+#     xp_gained = 0
+#     badge_unlocked = None
+
+#     # update answered attempts
+#     answered = session.get("answered", {})
+#     attempts = answered.get(str(qid), {"tries": 0, "correct": False})
+#     attempts["tries"] += 1
+#     if correct:
+#         attempts["correct"] = True
+#     answered[str(qid)] = attempts
+#     session["answered"] = answered
+
+#     if correct:
+#         session["streak"] = session.get("streak", 0) + 1
+#         xp_gained += XP_PER_CORRECT
+#         # streak bonus
+#         if session["streak"] > 0 and session["streak"] % 3 == 0:
+#             xp_gained += STREAK_BONUS
+#     else:
+#         session["streak"] = 0
+
+#     # update XP & level
+#     session["xp"] = session.get("xp", 0) + xp_gained
+#     prev_level = session.get("level", 1)
+#     new_level = prev_level + (session["xp"] // LEVEL_XP) - ((prev_level - 1) if prev_level>1 else 0)
+#     # simpler: recompute from xp:
+#     new_level = (session["xp"] // LEVEL_XP) + 1
+#     session["level"] = new_level
+
+#     # Check for a sample badge: Password Master if answered 3 password questions correctly (we keep it simple)
+#     if q["category"] == "password" and correct:
+#         # count correct password answers
+#         count = 0
+#         for k, v in session["answered"].items():
+#             qobj = next((x for x in QUESTION_BANK if str(x["id"]) == k), None)
+#             if qobj and qobj["category"] == "password" and v.get("correct"):
+#                 count += 1
+#         if count >= 3 and "Password Master" not in session["badges"]:
+#             session["badges"].append("Password Master")
+#             badge_unlocked = "Password Master"
+
+#     session.modified = True
+
+#     response = {
+#         "correct": correct,
+#         "hint": q.get("hint"),
+#         "xp_gained": xp_gained,
+#         "xp_total": session["xp"],
+#         "level": session["level"],
+#         "streak": session["streak"],
+#         "badges": session["badges"],
+#         "badge_unlocked": badge_unlocked
+#     }
+#     return jsonify(response)
 
 @app.route("/api/answer", methods=["POST"])
 def answer():
@@ -90,13 +296,12 @@ def answer():
     data = request.json
     qid = data.get("question_id")
     selected = data.get("selected_index")
-    # find question
     q = next((x for x in QUESTION_BANK if x["id"] == qid), None)
     if not q:
         return jsonify({"error": "Invalid question id"}), 400
 
     correct = (selected == q["answer_index"])
-    xp_gained = 0
+    xp_gained = XP_PER_CORRECT if correct else 0
     badge_unlocked = None
 
     # update answered attempts
@@ -108,34 +313,19 @@ def answer():
     answered[str(qid)] = attempts
     session["answered"] = answered
 
-    if correct:
-        session["streak"] = session.get("streak", 0) + 1
-        xp_gained += XP_PER_CORRECT
-        # streak bonus
-        if session["streak"] > 0 and session["streak"] % 3 == 0:
-            xp_gained += STREAK_BONUS
-    else:
-        session["streak"] = 0
+    # Only count XP for questions in current level's category
+    level = session.get("level", 1)
+    category = LEVEL_CATEGORIES[min(level-1, len(LEVEL_CATEGORIES)-1)]
+    if q["category"] == category:
+        session["level_xp"] = session.get("level_xp", 0) + xp_gained
+        session["xp"] = session.get("xp", 0) + xp_gained  # <-- ADD THIS LINE
 
-    # update XP & level
-    session["xp"] = session.get("xp", 0) + xp_gained
-    prev_level = session.get("level", 1)
-    new_level = prev_level + (session["xp"] // LEVEL_XP) - ((prev_level - 1) if prev_level>1 else 0)
-    # simpler: recompute from xp:
-    new_level = (session["xp"] // LEVEL_XP) + 1
-    session["level"] = new_level
-
-    # Check for a sample badge: Password Master if answered 3 password questions correctly (we keep it simple)
-    if q["category"] == "password" and correct:
-        # count correct password answers
-        count = 0
-        for k, v in session["answered"].items():
-            qobj = next((x for x in QUESTION_BANK if str(x["id"]) == k), None)
-            if qobj and qobj["category"] == "password" and v.get("correct"):
-                count += 1
-        if count >= 3 and "Password Master" not in session["badges"]:
-            session["badges"].append("Password Master")
-            badge_unlocked = "Password Master"
+    # Level progression logic
+    level_completed = False
+    if session.get("level_xp", 0) >= LEVEL_XP_THRESHOLD:
+        session["level"] = min(session["level"] + 1, len(LEVEL_CATEGORIES))
+        session["level_xp"] = 0
+        level_completed = True
 
     session.modified = True
 
@@ -143,13 +333,24 @@ def answer():
         "correct": correct,
         "hint": q.get("hint"),
         "xp_gained": xp_gained,
-        "xp_total": session["xp"],
+        "xp_total": session.get("xp", 0),  # <-- ADD THIS LINE
         "level": session["level"],
-        "streak": session["streak"],
+        "level_xp": session.get("level_xp", 0),
+        "level_completed": level_completed,
+        "category": category,
         "badges": session["badges"],
         "badge_unlocked": badge_unlocked
     }
     return jsonify(response)
+# @app.route("/api/status")
+# def status():
+#     init_session()
+#     return jsonify({
+#         "xp": session.get("xp", 0),
+#         "level": session.get("level", 1),
+#         "streak": session.get("streak", 0),
+#         "badges": session.get("badges", [])
+#     })
 
 @app.route("/api/status")
 def status():
@@ -157,6 +358,7 @@ def status():
     return jsonify({
         "xp": session.get("xp", 0),
         "level": session.get("level", 1),
+        "level_xp": session.get("level_xp", 0),
         "streak": session.get("streak", 0),
         "badges": session.get("badges", [])
     })

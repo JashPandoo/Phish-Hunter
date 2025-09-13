@@ -1,6 +1,6 @@
 let questions = [];
 let currentIndex = 0;
-const LEVEL_XP = 50;
+const LEVEL_XP = 30;
 
 async function fetchQuestions() {
   const res = await fetch("/api/questions");
@@ -63,41 +63,41 @@ async function submitAnswer(qid, idx, el){
   showFeedback(data, idx);
 }
 
-function showFeedback(data, selectedIdx){
-  const fb = document.getElementById("feedback");
-  fb.classList.remove("hidden");
-  document.getElementById("question-card").classList.add("hidden");
-  const result = document.getElementById("result");
-  if (data.correct){
-    result.innerText = `Correct! +${data.xp_gained} XP`;
-    result.style.color = "#7af";
-    // confetti on level up (simple)
-    if (data.level > parseInt(document.getElementById("level").innerText.split(" ")[1])){
-      runConfetti();
-    }
-  } else {
-    result.innerText = `Not Quite — ${data.xp_gained} XP`;
-    result.style.color = "#f77";
-  }
-  document.getElementById("hint").innerText = data.hint || "";
-  updateXPUI(data.xp_total, data.level);
-  document.getElementById("streak").innerText = data.streak;
-  renderBadges(data.badges || []);
-  if (data.badge_unlocked){
-    // small popup
-    alert("Badge unlocked: " + data.badge_unlocked);
-  }
-  // next button moves to next
-  document.getElementById("next-btn").onclick = () => {
-    currentIndex++;
-    if (currentIndex >= questions.length) {
-      // reshuffle by fetching again
-      fetchQuestions();
-    } else {
-      renderQuestion();
-    }
-  }
-}
+// function showFeedback(data, selectedIdx){
+//   const fb = document.getElementById("feedback");
+//   fb.classList.remove("hidden");
+//   document.getElementById("question-card").classList.add("hidden");
+//   const result = document.getElementById("result");
+//   if (data.correct){
+//     result.innerText = `Correct! +${data.xp_gained} XP`;
+//     result.style.color = "#7af";
+//     // confetti on level up (simple)
+//     if (data.level > parseInt(document.getElementById("level").innerText.split(" ")[1])){
+//       runConfetti();
+//     }
+//   } else {
+//     result.innerText = `Not Quite — ${data.xp_gained} XP`;
+//     result.style.color = "#f77";
+//   }
+//   document.getElementById("hint").innerText = data.hint || "";
+//   updateXPUI(data.xp_total, data.level);
+//   document.getElementById("streak").innerText = data.streak;
+//   renderBadges(data.badges || []);
+//   if (data.badge_unlocked){
+//     // small popup
+//     alert("Badge unlocked: " + data.badge_unlocked);
+//   }
+//   // next button moves to next
+//   document.getElementById("next-btn").onclick = () => {
+//     currentIndex++;
+//     if (currentIndex >= questions.length) {
+//       // reshuffle by fetching again
+//       fetchQuestions();
+//     } else {
+//       renderQuestion();
+//     }
+//   }
+// }
 
 function updateXPUI(xp, level){
   document.getElementById("xp").innerText = xp;
@@ -131,6 +131,43 @@ function runConfetti(){
       easing: 'cubic-bezier(.2,.6,.2,1)'
     });
     setTimeout(()=>c.remove(), 2000);
+  }
+}
+
+function showFeedback(data, selectedIdx){
+  const fb = document.getElementById("feedback");
+  fb.classList.remove("hidden");
+  document.getElementById("question-card").classList.add("hidden");
+  const result = document.getElementById("result");
+  if (data.correct){
+    result.innerText = `Correct! +${data.xp_gained} XP`;
+    result.style.color = "#7af";
+  } else {
+    result.innerText = `Not Quite — ${data.xp_gained} XP`;
+    result.style.color = "#f77";
+  }
+  document.getElementById("hint").innerText = data.hint || "";
+  updateXPUI(data.xp_total, data.level); // Use total XP for the bar
+  document.getElementById("streak").innerText = data.streak;
+  renderBadges(data.badges || []);
+  if (data.badge_unlocked){
+    alert("Badge unlocked: " + data.badge_unlocked);
+  }
+  document.getElementById("next-btn").onclick = () => {
+    if (data.level_completed) {
+      // Level up! Fetch new questions for the new category immediately.
+      alert("Level complete! Proceeding to next level.");
+      fetchQuestions();
+    } else {
+      currentIndex++;
+      if (currentIndex >= questions.length) {
+        // Only show the XP warning if the level is NOT completed
+        alert("You need more XP to pass this level. Try again!");
+        fetchQuestions();
+      } else {
+        renderQuestion();
+      }
+    }
   }
 }
 
