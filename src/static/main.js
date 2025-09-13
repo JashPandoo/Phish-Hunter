@@ -152,14 +152,21 @@ function showFeedback(data, selectedIdx){
       setTimeout(fetchQuestions, 1200);
       return;
     } else {
-      currentIndex++;
-      if (currentIndex >= questions.length) {
+    currentIndex++;
+    if (currentIndex >= questions.length) {
+      // Level failed: reset XP to threshold for this level
+      fetch("/api/answer", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({level_failed: true})
+      }).then(() => {
         alert("You need more XP to pass this level. Try again!");
         fetchQuestions();
-      } else {
-        renderQuestion();
-      }
+      });
+    } else {
+      renderQuestion();
     }
+  }
   }
 }
 window.onload = () => {

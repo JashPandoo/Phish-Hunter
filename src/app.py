@@ -329,6 +329,15 @@ def answer():
     if session.get("xp", 0) >= LEVEL_XP_THRESHOLD * len(LEVEL_CATEGORIES):
         game_completed = True
 
+     # --- XP fallback logic on level fail ---
+    # If the frontend signals a level fail (e.g., after all questions and not enough XP), 
+    # you need to reset XP to the start of the current level.
+    # We'll check for a flag in the request (e.g., "level_failed": true)
+    if data.get("level_failed"):
+        # Set XP to the threshold for the start of this level
+        session["xp"] = LEVEL_XP_THRESHOLD * (level - 1)
+        session["level_xp"] = 0
+        
     session.modified = True
 
     response = {
