@@ -29,7 +29,7 @@ http://127.0.0.1:5000
 // TODO: Link your demo video and PowerPoint here
 ```
 Check out the Demos: 
-- [Demo Video](demo/Phish Hunter demo.mp4)
+- [Demo Video](https://youtu.be/BdDmSD1flck)
 - [Demo Presentation](demo/Phish Hunter.pptx)
 
 ## 📌 Notes
